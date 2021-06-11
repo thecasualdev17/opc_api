@@ -1,6 +1,13 @@
 import cryptoRandomString from 'crypto-random-string';
 import express from 'express';
+import cors from 'cors';
 var app = express();
+var corsOptions = {
+    origin: 'http://localhost:3001',
+    optionsSuccessStatus: 200
+}
+
+app.use(cors(corsOptions));
 
 app.get('/', function (req, res) {
     res.json({
