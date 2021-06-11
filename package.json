@@ -5,16 +5,10 @@
   "main": "app.js",
   "type": "module",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
   },
-  "keywords": [
-    "Ominilytics",
-    "Programming",
-    "Challenge",
-    "API",
-    "Part"
-  ],
+  "keywords": [],
   "author": "Ronald Erosa",
   "license": "ISC",
   "dependencies": {
