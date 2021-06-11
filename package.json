@@ -1,0 +1,23 @@
+{
+  "name": "opc_api",
+  "version": "1.0.0",
+  "description": "Omnilytics Programming Challenge - API",
+  "main": "app.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Ominilytics",
+    "Programming",
+    "Challenge",
+    "API",
+    "Part"
+  ],
+  "author": "Ronald Erosa",
+  "license": "ISC",
+  "dependencies": {
+    "crypto-random-string": "^4.0.0",
+    "express": "^4.17.1"
+  }
+}
