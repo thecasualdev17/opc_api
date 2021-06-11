@@ -18,9 +18,7 @@ app.get('/', function (req, res) {
 
 
 app.get('/generate', function (req, res) {
-    res.json({
-        data: generate2MBString()
-    });
+    res.json(generate2MBString());
 });
 
 
