@@ -3,7 +3,7 @@ import express from 'express';
 import cors from 'cors';
 var app = express();
 var corsOptions = {
-    origin: 'http://localhost:3001',
+    origin: ['http://localhost:3001','https://opc-ui.netlify.app/'],
     optionsSuccessStatus: 200
 }
 
