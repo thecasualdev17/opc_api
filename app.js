@@ -17,11 +17,13 @@ app.get('/', function (req, res) {
     });
 });
 
-
 app.get('/generate', function (req, res) {
     res.json(generate2MBString());
 });
 
+app.get('/generateSingleRandomObject', function (req, res) {
+    res.json(generateRandomObject());
+});
 
 app.listen(port, function () {
   console.log('Server started successfully.');
@@ -68,6 +70,30 @@ function generate2MBString(){
         realNumbersCount: realNumbersCount,
         integersCount: integersCount,
         alphanumericsCount: alphanumericsCount,
+    };
+}
+
+function generateRandomObject(){
+    var type = -1;
+    var output = "";
+    var mod = Math.random();
+    if(mod > 0.75){
+        output = generateAlphebeticalStrings();
+        type = 0;
+    }else if (mod > 0.5){
+        output = generateNumbersWithDecimal();
+        type = 1;
+    }else if (mod > 0.25){
+        output = generateIntegers();
+        type = 2;
+    }else{
+        output = generateAlphanumerics();
+        type = 3;
+    }
+    
+    return {
+        generatedRandomObject: output,
+        type: type
     };
 }
 
