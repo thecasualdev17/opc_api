@@ -2,7 +2,7 @@
 
 This project is bare react app made with npm init
 
-## The Challennge
+## The Challenge
 
 **Challenge Description**
 
