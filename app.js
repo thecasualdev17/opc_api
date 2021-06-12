@@ -34,7 +34,6 @@ app.get('/generateMultiPartRandomObject', function (req, res) {
 
 //2097152 = 2MB
 //500000 = 0.5mb
-
 function generateMultiPartRandomObject(){
 
     var alphabeticalStringsCount = 0;
@@ -45,7 +44,7 @@ function generateMultiPartRandomObject(){
     var output1 = "";
     var output2 = "";
 
-    while(Buffer.from(output1).length < 1000000){
+    while(Buffer.from(output1).length < 1024000){
         //console.log(Buffer.from(output).length);
         var mod = Math.random();
         var generatedObject = "";
@@ -70,7 +69,7 @@ function generateMultiPartRandomObject(){
         }
     }
     
-    while(Buffer.from(output2).length < 1000000){
+    while(Buffer.from(output2).length < 1024000){
         //console.log(Buffer.from(output).length);
         var mod = Math.random();
         var generatedObject = "";
