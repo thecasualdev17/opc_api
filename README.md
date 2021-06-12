@@ -22,3 +22,16 @@ page so by clicking on this button the total number of each random objects will 
 
 **Note: The backend API must be written using Flask (Python) or Express frameworks.  
 All the communication between frontend and backend MUST be done via these APIs only.**
+
+## The Product 
+
+**Links associated with API**  
+
+`/` - returns basic information
+
+`/generate`  - returns solution in linear approach (for localhost)
+
+`/generateMultiPartRandomObject`  - returns solution in multipart approach (for low end servers)
+
+API Part can be found on this link: [HEROKU](https://opc-api.herokuapp.com/) - [EC2](http://54.255.196.92:3000)  
+UI Part can be found in here [APP](https://opc-ui.netlify.app/) - [GIT](https://github.com/thecasualdev17/opc_ui)
