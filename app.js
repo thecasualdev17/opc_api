@@ -44,7 +44,7 @@ function generateMultiPartRandomObject(){
     var output1 = "";
     var output2 = "";
 
-    while(Buffer.from(output1).length < 1024000){
+    while(Buffer.from(output1).length < 1048576){
         //console.log(Buffer.from(output).length);
         var mod = Math.random();
         var generatedObject = "";
@@ -69,7 +69,7 @@ function generateMultiPartRandomObject(){
         }
     }
     
-    while(Buffer.from(output2).length < 1024000){
+    while(Buffer.from(output2).length < 1048576){
         //console.log(Buffer.from(output).length);
         var mod = Math.random();
         var generatedObject = "";
