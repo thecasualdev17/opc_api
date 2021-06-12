@@ -36,72 +36,55 @@ app.get('/generateMultiPartRandomObject', function (req, res) {
 //500000 = 0.5mb
 function generateMultiPartRandomObject(){
 
-    var alphabeticalStringsCount = 0;
-    var realNumbersCount = 0;
-    var integersCount = 0;
-    var alphanumericsCount = 0;
-
-    var output1 = "";
-    var output2 = "";
-
-    while(Buffer.from(output1).length < 1048576){
-        //console.log(Buffer.from(output).length);
-        var mod = Math.random();
-        var generatedObject = "";
-        if(mod > 0.75){
-            generatedObject = generateAlphebeticalStrings();
-            alphabeticalStringsCount++;
-        }else if (mod > 0.5){
-            generatedObject = generateNumbersWithDecimal();
-            realNumbersCount++;
-        }else if (mod > 0.25){
-            generatedObject = generateIntegers();
-            integersCount++;
-            realNumbersCount++;
-        }else{
-            generatedObject = generateAlphanumerics();
-            alphanumericsCount++;
-        }
-        if(output1.length == 0){
-            output1 += generatedObject;
-        }else{
-            output1 += ("," +generatedObject);
-        }
-    }
-    
-    while(Buffer.from(output2).length < 1048576){
-        //console.log(Buffer.from(output).length);
-        var mod = Math.random();
-        var generatedObject = "";
-        if(mod > 0.75){
-            generatedObject = generateAlphebeticalStrings();
-            alphabeticalStringsCount++;
-        }else if (mod > 0.5){
-            generatedObject = generateNumbersWithDecimal();
-            realNumbersCount++;
-        }else if (mod > 0.25){
-            generatedObject = generateIntegers();
-            integersCount++;
-            realNumbersCount++;
-        }else{
-            generatedObject = generateAlphanumerics();
-            alphanumericsCount++;
-        }
-        if(output2.length == 0){
-            output2 += generatedObject;
-        }else{
-            output2 += ("," +generatedObject);
-        }
-    }
-
-    return {
-        generatedString: output1 + output2,
-        alphabeticalStringsCount: alphabeticalStringsCount,
-        realNumbersCount: realNumbersCount,
-        integersCount: integersCount,
-        alphanumericsCount: alphanumericsCount,
+    var stats = {
+        generatedString: "",
+        alphabeticalStringsCount: 0,
+        realNumbersCount: 0,
+        integersCount: 0,
+        alphanumericsCount: 0,
     };
+
+    var output1 = {output: ""};
+    var output2 = {output: ""};
+    var output3 = {output: ""};
+    var output4 = {output: ""};
+
+    generateRandomObjectOfSize(output1, stats);
+    generateRandomObjectOfSize(output2, stats);
+    generateRandomObjectOfSize(output3, stats);
+    generateRandomObjectOfSize(output4, stats);
+
+    stats.generatedString = output1.output + "," + output2.output + "," + output3.output + "," + output4.output;
+    return stats;
 }
+
+function generateRandomObjectOfSize(obj, stats){
+    while(Buffer.from(obj.output).length < 524288){
+        //console.log(Buffer.from(output).length);
+        var mod = Math.random();
+        var generatedObject = "";
+        if(mod > 0.75){
+            generatedObject = generateAlphebeticalStrings();
+            stats.alphabeticalStringsCount++;
+        }else if (mod > 0.5){
+            generatedObject = generateNumbersWithDecimal();
+            stats.realNumbersCount++;
+        }else if (mod > 0.25){
+            generatedObject = generateIntegers();
+            stats.integersCount++;
+            stats.realNumbersCount++;
+        }else{
+            generatedObject = generateAlphanumerics();
+            stats.alphanumericsCount++;
+        }
+        if(obj.output.length == 0){
+            obj.output += generatedObject;
+        }else{
+            obj.output += ("," +generatedObject);
+        }
+    }   
+}
+
 function generateStringOfSize(size){
 
     var alphabeticalStringsCount = 0;
