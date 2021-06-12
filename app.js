@@ -26,18 +26,83 @@ app.listen(port, function () {
   });
 
 /** Start: signatures below are experimental for free/low tier servers (usually with low computing power)  */
-app.get('/generateSingleRandomObject', function (req, res) {
-    res.json(generateRandomObject());
-});
-
-app.get('/generateHalfMBObject', function (req, res) {
-    res.json(generateStringOfSize(500000));
+app.get('/generateMultiPartRandomObject', function (req, res) {
+    res.json(generateMultiPartRandomObject());
 });
 /** End: signatures above are experimental for free/low tier servers (usually with low computing power)  */
 
 
 //2097152 = 2MB
 //500000 = 0.5mb
+
+function generateMultiPartRandomObject(){
+
+    var alphabeticalStringsCount = 0;
+    var realNumbersCount = 0;
+    var integersCount = 0;
+    var alphanumericsCount = 0;
+
+    var output1 = "";
+    var output2 = "";
+
+    while(Buffer.from(output1).length < 1000000){
+        //console.log(Buffer.from(output).length);
+        var mod = Math.random();
+        var generatedObject = "";
+        if(mod > 0.75){
+            generatedObject = generateAlphebeticalStrings();
+            alphabeticalStringsCount++;
+        }else if (mod > 0.5){
+            generatedObject = generateNumbersWithDecimal();
+            realNumbersCount++;
+        }else if (mod > 0.25){
+            generatedObject = generateIntegers();
+            integersCount++;
+            realNumbersCount++;
+        }else{
+            generatedObject = generateAlphanumerics();
+            alphanumericsCount++;
+        }
+        if(output1.length == 0){
+            output1 += generatedObject;
+        }else{
+            output1 += ("," +generatedObject);
+        }
+    }
+    
+    while(Buffer.from(output2).length < 1000000){
+        //console.log(Buffer.from(output).length);
+        var mod = Math.random();
+        var generatedObject = "";
+        if(mod > 0.75){
+            generatedObject = generateAlphebeticalStrings();
+            alphabeticalStringsCount++;
+        }else if (mod > 0.5){
+            generatedObject = generateNumbersWithDecimal();
+            realNumbersCount++;
+        }else if (mod > 0.25){
+            generatedObject = generateIntegers();
+            integersCount++;
+            realNumbersCount++;
+        }else{
+            generatedObject = generateAlphanumerics();
+            alphanumericsCount++;
+        }
+        if(output2.length == 0){
+            output2 += generatedObject;
+        }else{
+            output2 += ("," +generatedObject);
+        }
+    }
+
+    return {
+        generatedString: output1 + output2,
+        alphabeticalStringsCount: alphabeticalStringsCount,
+        realNumbersCount: realNumbersCount,
+        integersCount: integersCount,
+        alphanumericsCount: alphanumericsCount,
+    };
+}
 function generateStringOfSize(size){
 
     var alphabeticalStringsCount = 0;
@@ -80,31 +145,6 @@ function generateStringOfSize(size){
         alphanumericsCount: alphanumericsCount,
     };
 }
-
-function generateRandomObject(){
-    var type = -1;
-    var output = "";
-    var mod = Math.random();
-    if(mod > 0.75){
-        output = generateAlphebeticalStrings();
-        type = 0;
-    }else if (mod > 0.5){
-        output = generateNumbersWithDecimal();
-        type = 1;
-    }else if (mod > 0.25){
-        output = generateIntegers();
-        type = 2;
-    }else{
-        output = generateAlphanumerics();
-        type = 3;
-    }
-    
-    return {
-        generatedRandomObject: output,
-        type: type
-    };
-}
-
 function generateAlphebeticalStrings(){
     var alphabeticalString = generateAlphanumerics();
     alphabeticalString = alphabeticalString.replace(/[0-9]/g, '');
