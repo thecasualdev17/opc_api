@@ -18,19 +18,27 @@ app.get('/', function (req, res) {
 });
 
 app.get('/generate', function (req, res) {
-    res.json(generate2MBString());
+    res.json(generateStringOfSize(2097152));
 });
 
+app.listen(port, function () {
+    console.log('Server started successfully.');
+  });
+
+/** Start: signatures below are experimental for free/low tier servers (usually with low computing power)  */
 app.get('/generateSingleRandomObject', function (req, res) {
     res.json(generateRandomObject());
 });
 
-app.listen(port, function () {
-  console.log('Server started successfully.');
+app.get('/generateHalfMBObject', function (req, res) {
+    res.json(generateStringOfSize(500000));
 });
+/** End: signatures above are experimental for free/low tier servers (usually with low computing power)  */
 
 
-function generate2MBString(){
+//2097152 = 2MB
+//500000 = 0.5mb
+function generateStringOfSize(size){
 
     var alphabeticalStringsCount = 0;
     var realNumbersCount = 0;
@@ -39,7 +47,7 @@ function generate2MBString(){
 
     var output = "";
 
-    while(Buffer.from(output).length < 2097152){
+    while(Buffer.from(output).length < size){
         //console.log(Buffer.from(output).length);
         var mod = Math.random();
         var generatedObject = "";
